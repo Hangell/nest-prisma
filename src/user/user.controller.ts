@@ -25,12 +25,12 @@ export class UserController {
 
   @Get()
   async list() {
-    return { users: [] };
+    return this.userService.list();
   }
 
   @Get(':id')
   async show(@Param('id', ParseIntPipe) id: number) {
-    return { user: {}, id };
+    return this.userService.show(id);
   }
 
   @Put(':id')
@@ -38,7 +38,7 @@ export class UserController {
     @Body() user: UpdatePutUserDto,
     @Param('id', ParseIntPipe) id: number,
   ) {
-    return { user, id };
+    return this.userService.update(id, user);
   }
 
   @Patch(':id')
@@ -46,11 +46,11 @@ export class UserController {
     @Body() user: UpdatePatchUserDto,
     @Param('id', ParseIntPipe) id: number,
   ) {
-    return { user, id };
+    return this.userService.updatePartial(id, user);
   }
 
   @Delete(':id')
   async delete(@Param('id', ParseIntPipe) id: number) {
-    return { id };
+    return this.userService.delete(id);
   }
 }
